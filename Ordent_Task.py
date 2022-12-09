@@ -16,12 +16,23 @@ driver = webdriver.Chrome()
 #pickle.dump( driver.get_cookies() , open("cookies.pkl","wb"))
 driver.maximize_window()
 
+Email = "aka.alam97@gmail.com"
+WrongEmail = "ada.alam97@gmail.com"
+FormatEmail = "aka.alam97!gmail.com"
+Password = "Test1234"
+Gmail = "ade.kurnia.testing@gmail.com"
+PasswordGmail = "@Test1234"
+Phone = "087888330380"
+Phone62 = "6287888330380"
+PhoneMore13 = "081234567890123456"
+PhoneLess10 = "081234"
+
 def test_loginEmailPositif():
     driver.get("https://bioskoponline.com/")
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.XPATH, "//button[3]")))
     driver.find_element(By.XPATH, "//button[3]").click()
-    driver.find_element(By.NAME, "username").send_keys("aka.alam97@gmail.com")
-    driver.find_element(By.XPATH, "//input[@type=\'password\']").send_keys("Test1234")
+    driver.find_element(By.NAME, "username").send_keys(Email)
+    driver.find_element(By.XPATH, "//input[@type=\'password\']").send_keys(Password)
     driver.find_element(By.XPATH, "//form/button").click()
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".toasted")))
     assert driver.find_element(By.CSS_SELECTOR, ".toasted").text == 'check\nMasuk berhasil'
@@ -37,12 +48,12 @@ def test_loginEmailPositif2():
     driver.get("https://bioskoponline.com/")
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.XPATH, "//button[3]")))
     driver.find_element(By.XPATH, "//button[3]").click()
-    driver.find_element(By.NAME, "username").send_keys("aka.alam97@gmail.com")
+    driver.find_element(By.NAME, "username").send_keys(Email)
     time.sleep(2)
     driver.find_element(By.CSS_SELECTOR, ".text-xl:nth-child(1)").click()
     time.sleep(2)
-    driver.find_element(By.NAME, "username").send_keys("aka.alam97@gmail.com")
-    driver.find_element(By.XPATH, "//input[@type=\'password\']").send_keys("Test1234")
+    driver.find_element(By.NAME, "username").send_keys(Email)
+    driver.find_element(By.XPATH, "//input[@type=\'password\']").send_keys(Password)
     time.sleep(2)
     driver.find_element(By.CSS_SELECTOR, ".absolute > svg").click()
     time.sleep(2)
@@ -61,8 +72,8 @@ def test_loginPonselPositif():
     driver.get("https://bioskoponline.com/")
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.XPATH, "//button[3]")))
     driver.find_element(By.XPATH, "//button[3]").click()
-    driver.find_element(By.NAME, "username").send_keys("087888330380")
-    driver.find_element(By.XPATH, "//input[@type=\'password\']").send_keys("Test1234")
+    driver.find_element(By.NAME, "username").send_keys(Phone)
+    driver.find_element(By.XPATH, "//input[@type=\'password\']").send_keys(Password)
     driver.find_element(By.XPATH, "//form/button").click()
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".toasted")))
     assert driver.find_element(By.CSS_SELECTOR, ".toasted").text == 'check\nMasuk berhasil'
@@ -78,10 +89,10 @@ def test_loginGoogle():
     driver.get("https://bioskoponline.com/")
     driver.find_element(By.XPATH, "//button[3]").click()
     driver.find_element(By.CSS_SELECTOR, ".py-2:nth-child(1)").click()
-    driver.find_element(By.ID, "identifierId").send_keys("ade.kurnia.testing@gmail.com")
+    driver.find_element(By.ID, "identifierId").send_keys(Gmail)
     driver.find_element(By.ID, "identifierId").send_keys(Keys.ENTER)
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.XPATH, "//div[@id='password']/div/div/div/input")))
-    driver.find_element(By.XPATH, "//div[@id='password']/div/div/div/input").send_keys("@Test1234")
+    driver.find_element(By.XPATH, "//div[@id='password']/div/div/div/input").send_keys(PasswordGmail)
     driver.find_element(By.XPATH, "//div[@id='password']/div/div/div/input").send_keys(Keys.ENTER)
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".toasted")))
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".toasted")))
@@ -98,8 +109,8 @@ def test_loginFacebook():
     driver.get("https://bioskoponline.com/")
     driver.find_element(By.XPATH, "//button[3]").click()
     driver.find_element(By.CSS_SELECTOR, ".py-2:nth-child(2)").click()
-    driver.find_element(By.ID, "email").send_keys("ade.kurnia.testing@gmail.com")
-    driver.find_element(By.ID, "pass").send_keys("Test1234")
+    driver.find_element(By.ID, "email").send_keys(Gmail)
+    driver.find_element(By.ID, "pass").send_keys(Password)
     driver.find_element(By.ID, "loginbutton").click()
     driver.find_element(By.CSS_SELECTOR, ".x6ikm8r").click()
     assert driver.find_element(By.CSS_SELECTOR, ".text-xxs").text == "Akses Token tidak boleh kosong."
@@ -108,7 +119,7 @@ def test_loginFacebook():
 def test_loginLupaKataSandi():
     driver.get("https://bioskoponline.com/")
     driver.find_element(By.XPATH, "//button[3]").click()
-    driver.find_element(By.NAME, "username").send_keys("aka.alam97@gmail.com")
+    driver.find_element(By.NAME, "username").send_keys(Email)
     driver.find_element(By.CSS_SELECTOR, ".flex > .text-sm").click()
     time.sleep(2)
     assert driver.find_element(By.CSS_SELECTOR, ".layout-forgot-wrapper .text-xl").text == 'Lupa Kata Sandi'
@@ -118,7 +129,7 @@ def test_loginPonselNegatif():
     driver.get("https://bioskoponline.com/")
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.XPATH, "//button[3]")))
     driver.find_element(By.XPATH, "//button[3]").click()
-    driver.find_element(By.NAME, "username").send_keys("6287888330380")
+    driver.find_element(By.NAME, "username").send_keys(Phone62)
     time.sleep(2)
     assert driver.find_element(By.CSS_SELECTOR, ".text-red-secondary").text == 'Nomor ponsel minimal 10 digit dan berawalan 0'
 
@@ -126,7 +137,7 @@ def test_loginPonselNegatif2():
     driver.get("https://bioskoponline.com/")
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.XPATH, "//button[3]")))
     driver.find_element(By.XPATH, "//button[3]").click()
-    driver.find_element(By.NAME, "username").send_keys("0812345")
+    driver.find_element(By.NAME, "username").send_keys(PhoneLess10)
     time.sleep(2)
     assert driver.find_element(By.CSS_SELECTOR, ".text-red-secondary").text == 'Nomor ponsel minimal 10 digit dan berawalan 0'
 
@@ -134,7 +145,7 @@ def test_loginPonselNegatif3():
     driver.get("https://bioskoponline.com/")
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.XPATH, "//button[3]")))
     driver.find_element(By.XPATH, "//button[3]").click()
-    driver.find_element(By.NAME, "username").send_keys("08123456789012345")
+    driver.find_element(By.NAME, "username").send_keys(PhoneMore13)
     time.sleep(2)
     assert driver.find_element(By.CSS_SELECTOR, ".text-red-secondary").text == 'Nomor ponsel minimal 10 digit dan berawalan 0'
     time.sleep(2)
@@ -143,8 +154,8 @@ def test_loginEmailNegatif():
     driver.get("https://bioskoponline.com/")
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.XPATH, "//button[3]")))
     driver.find_element(By.XPATH, "//button[3]").click()
-    driver.find_element(By.NAME, "username").send_keys("aka.alam97@gmail.com")
-    driver.find_element(By.XPATH, "//input[@type=\'password\']").send_keys("abcd1234")
+    driver.find_element(By.NAME, "username").send_keys(Email)
+    driver.find_element(By.XPATH, "//input[@type=\'password\']").send_keys(PasswordGmail)
     driver.find_element(By.XPATH, "//form/button").click()
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".bg-red-secondary")))
     assert driver.find_element(By.CSS_SELECTOR, ".bg-red-secondary").text == "Email, nomor ponsel / kata sandi kamu salah."
@@ -154,8 +165,8 @@ def test_loginEmailNegatif2():
     driver.get("https://bioskoponline.com/")
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.XPATH, "//button[3]")))
     driver.find_element(By.XPATH, "//button[3]").click()
-    driver.find_element(By.NAME, "username").send_keys("ada.alam97@gmail.com")
-    driver.find_element(By.XPATH, "//input[@type=\'password\']").send_keys("Test1234")
+    driver.find_element(By.NAME, "username").send_keys(WrongEmail)
+    driver.find_element(By.XPATH, "//input[@type=\'password\']").send_keys(Password)
     driver.find_element(By.XPATH, "//form/button").click()
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".bg-red-secondary")))
     assert driver.find_element(By.CSS_SELECTOR, ".bg-red-secondary").text == "Email, nomor ponsel / kata sandi kamu salah"
@@ -165,7 +176,7 @@ def test_loginEmailNegatif3():
     driver.get("https://bioskoponline.com/")
     WebDriverWait(driver, 30).until(expected_conditions.visibility_of_element_located((By.XPATH, "//button[3]")))
     driver.find_element(By.XPATH, "//button[3]").click()
-    driver.find_element(By.NAME, "username").send_keys("aka.alam97!gmail.com")
+    driver.find_element(By.NAME, "username").send_keys(FormatEmail)
     time.sleep(2)
     assert driver.find_element(By.CSS_SELECTOR, ".text-red-secondary").text == 'Email harus mengandung @'
     time.sleep(2)
